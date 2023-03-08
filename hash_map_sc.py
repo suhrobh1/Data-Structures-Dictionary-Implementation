@@ -92,12 +92,7 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-
-        # print(self.get_capacity())
-
-        # print("hash val str23", hash_function_1("str23"))
-        # print("hash val str14", hash_function_1("str14"))
-        # print("hash val str0", hash_function_1("str0"))
+        
 
         hash = hash_function_1(key)
         size = self.get_capacity()
@@ -108,14 +103,14 @@ class HashMap:
 
         # Check if rezise is needed. Use load factor for test (IMPORTANT TO self.size += 1)
         # Check if value already exists
-
-        # print(self._buckets[index].length())
-        # if( self._buckets[index].length() == 0):
+        
         load_factor = self._size / self.get_capacity()
+
         print(load_factor)
         if load_factor >= 1:
             self.resize_table(self.get_capacity() * 2)
-            print(self.get_capacity())
+        print(self.get_capacity())
+
 
         if self._buckets[index].contains(key):
             node = self._buckets[index].contains(key)
@@ -123,16 +118,18 @@ class HashMap:
         else:
             self._buckets[index].insert(key, value)
             self._size += 1
-        # else:
-        #     print("else")
-
-        # print(self._buckets[index])
+     
 
     def empty_buckets(self) -> int:
         """
         TODO: Write this implementation
         """
-        pass
+        counter = 0
+        for i in range(self.get_capacity()):
+            if self._buckets[i] in None:
+                counter += 1
+        return counter
+
 
     def table_load(self) -> float:
         """
@@ -150,9 +147,9 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        new_bucket = DynamicArray(new_capacity)
-        for i in self._buckets:
-            new_bucket[i] = self._buckets[i]
+        new_bucket = DynamicArray()
+        for i in range(self.get_capacity()):
+            new_bucket.set_at_index(i, self._buckets[i])
             # self._capacity = new_capacity
             self._buckets = new_bucket
 
@@ -200,8 +197,9 @@ if __name__ == "__main__":
     for i in range(150):
         m.put('str' + str(i), i * 100)
         if i % 25 == 24:
-            print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(),
-                  m.get_capacity())
+            # print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(),
+            #       m.get_capacity())
+            print(m.get_capacity())
 
     print("\nPDF - put example 2")
     print("-------------------")
