@@ -111,10 +111,10 @@ class HashMap:
 
         # print(self._buckets[index].length())
         # if( self._buckets[index].length() == 0):
-        load_factor = self._size / self._buckets.get_capacity()
+        load_factor = self._size / self.get_capacity()
         print(load_factor)
         if load_factor >= 1:
-            self.resize_table(self._buckets.get_capacity() * 2)
+            self.resize_table(self.get_capacity() * 2)
 
         if self._buckets[index].contains(key):
             node = self._buckets[index].contains(key)
