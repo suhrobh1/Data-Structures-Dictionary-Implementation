@@ -112,10 +112,14 @@ class HashMap:
         # print(self._buckets[index].length())
         # if( self._buckets[index].length() == 0):
         load_factor = self._size / self.get_capacity()
+        print(load_factor)
         if load_factor >= 1:
             self.resize_table(self._buckets.gt_capacity() * 2)
-        if self._buckets[index].contains(key) is None:
 
+        if self._buckets[index].contains(key):
+            node = self._buckets[index].contains(key)
+            node.value = key_pair
+        else:
             self._buckets[index].insert(key, value)
             self._size += 1
         # else:
@@ -148,8 +152,9 @@ class HashMap:
         new_bucket = DynamicArray(new_capacity)
         for i in self._buckets:
             new_bucket[i] = self._buckets[i]
-            self._capacity = new_capacity
-                
+            # self._capacity = new_capacity
+            self._buckets = new_bucket
+
     def get(self, key: str):
         """
         TODO: Write this implementation
