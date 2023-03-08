@@ -126,7 +126,7 @@ class HashMap:
         """
         counter = 0
         for i in range(self.get_capacity()):
-            if self._buckets[i] in None:
+            if self._buckets[i] is None:
                 counter += 1
         return counter
 
