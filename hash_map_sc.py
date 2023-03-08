@@ -5,12 +5,12 @@
 # Due Date:
 # Description:
 
-
-from a6_include import (DynamicArray, LinkedList,
-                        hash_function_1, hash_function_2)
+from a6_include import (DynamicArray, LinkedList, hash_function_1,
+                        hash_function_2)
 
 
 class HashMap:
+
     def __init__(self,
                  capacity: int = 11,
                  function: callable = hash_function_1) -> None:
@@ -65,7 +65,7 @@ class HashMap:
             return False
 
         factor = 3
-        while factor ** 2 <= capacity:
+        while factor**2 <= capacity:
             if capacity % factor == 0:
                 return False
             factor += 2
@@ -92,29 +92,32 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        
-  
 
+        # print(self.get_capacity())
 
-        # if self._size == 0:
-        #     hashed_key = hash_function_1(key) 
-        #     key_value = [key, value]
+        print("hash val str23", hash_function_1("str23"))
+        print("hash val str14", hash_function_1("str14"))
+        print("hash val str0", hash_function_1("str0"))
 
-        #     self._buckets.append(key_value)
-        #     self._size += 1
-        #     print("not failed")
+        hash = hash_function_1(key)
+        size = self.get_capacity()
+        index = hash % size
+        # print(index)
+
+        key_pair = (key, value)
+
+        # Check if rezise is needed. Use load factor for test (IMPORTANT TO self.size += 1)
+        # Check if value already exists
+
+        # print(self._buckets[index].length())
+        # if( self._buckets[index].length() == 0):
+
+        self._buckets[index].insert(key, value)
+        self._size += 1
         # else:
-        #     print("failed")
-            #hashed_key = hash_function_1(key) % self._size
+        #     print("else")
 
-        
-        
-
-
-        # found_key = False
-        # for i in self._buckets:
-        #     print(i)
-
+        # print(self._buckets[index])
 
     def empty_buckets(self) -> int:
         """
@@ -184,7 +187,8 @@ if __name__ == "__main__":
     for i in range(150):
         m.put('str' + str(i), i * 100)
         if i % 25 == 24:
-            print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(), m.get_capacity())
+            print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(),
+                  m.get_capacity())
 
     print("\nPDF - put example 2")
     print("-------------------")
@@ -192,7 +196,8 @@ if __name__ == "__main__":
     for i in range(50):
         m.put('str' + str(i // 3), i * 100)
         if i % 10 == 9:
-            print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(), m.get_capacity())
+            print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(),
+                  m.get_capacity())
 
     print("\nPDF - empty_buckets example 1")
     print("-----------------------------")
@@ -262,9 +267,11 @@ if __name__ == "__main__":
     print("----------------------")
     m = HashMap(23, hash_function_1)
     m.put('key1', 10)
-    print(m.get_size(), m.get_capacity(), m.get('key1'), m.contains_key('key1'))
+    print(m.get_size(), m.get_capacity(), m.get('key1'),
+          m.contains_key('key1'))
     m.resize_table(30)
-    print(m.get_size(), m.get_capacity(), m.get('key1'), m.contains_key('key1'))
+    print(m.get_size(), m.get_capacity(), m.get('key1'),
+          m.contains_key('key1'))
 
     print("\nPDF - resize example 2")
     print("----------------------")
@@ -286,7 +293,8 @@ if __name__ == "__main__":
             result &= m.contains_key(str(key))
             # NOT inserted keys must be absent
             result &= not m.contains_key(str(key + 1))
-        print(capacity, result, m.get_size(), m.get_capacity(), round(m.table_load(), 2))
+        print(capacity, result, m.get_size(), m.get_capacity(),
+              round(m.table_load(), 2))
 
     print("\nPDF - get example 1")
     print("-------------------")
@@ -364,11 +372,12 @@ if __name__ == "__main__":
 
     print("\nPDF - find_mode example 2")
     print("-----------------------------")
-    test_cases = (
-        ["Arch", "Manjaro", "Manjaro", "Mint", "Mint", "Mint", "Ubuntu", "Ubuntu", "Ubuntu"],
-        ["one", "two", "three", "four", "five"],
-        ["2", "4", "2", "6", "8", "4", "1", "3", "4", "5", "7", "3", "3", "2"]
-    )
+    test_cases = ([
+        "Arch", "Manjaro", "Manjaro", "Mint", "Mint", "Mint", "Ubuntu",
+        "Ubuntu", "Ubuntu"
+    ], ["one", "two", "three", "four", "five"], [
+        "2", "4", "2", "6", "8", "4", "1", "3", "4", "5", "7", "3", "3", "2"
+    ])
 
     for case in test_cases:
         da = DynamicArray(case)

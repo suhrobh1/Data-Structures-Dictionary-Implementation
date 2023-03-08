@@ -84,7 +84,7 @@ def hash_function_1(key: str) -> int:
     for letter in key:
         hash += ord(letter)
     return hash
-
+    
 
 def hash_function_2(key: str) -> int:
     """Sample Hash function #2 to be used with HashMap implementation"""
