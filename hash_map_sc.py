@@ -148,6 +148,7 @@ class HashMap:
         new_bucket = DynamicArray(new_capacity)
         for i in self._buckets:
             new_bucket[i] = self._buckets[i]
+            self._capacity = new_capacity
                 
     def get(self, key: str):
         """
