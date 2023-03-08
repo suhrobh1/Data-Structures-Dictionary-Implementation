@@ -111,7 +111,7 @@ class HashMap:
 
         # print(self._buckets[index].length())
         # if( self._buckets[index].length() == 0):
-        if self._buckets[index].contains(key) is False:
+        if self._buckets[index].contains(key) is None:
             self._buckets[index].insert(key, value)
             self._size += 1
         # else:
