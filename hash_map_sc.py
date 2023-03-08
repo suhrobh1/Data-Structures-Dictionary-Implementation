@@ -95,9 +95,9 @@ class HashMap:
 
         # print(self.get_capacity())
 
-        print("hash val str23", hash_function_1("str23"))
-        print("hash val str14", hash_function_1("str14"))
-        print("hash val str0", hash_function_1("str0"))
+#         print("hash val str23", hash_function_1("str23"))
+#         print("hash val str14", hash_function_1("str14"))
+#         print("hash val str0", hash_function_1("str0"))
 
         hash = hash_function_1(key)
         size = self.get_capacity()
