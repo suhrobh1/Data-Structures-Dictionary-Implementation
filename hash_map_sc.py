@@ -95,9 +95,9 @@ class HashMap:
 
         # print(self.get_capacity())
 
-#         print("hash val str23", hash_function_1("str23"))
-#         print("hash val str14", hash_function_1("str14"))
-#         print("hash val str0", hash_function_1("str0"))
+        # print("hash val str23", hash_function_1("str23"))
+        # print("hash val str14", hash_function_1("str14"))
+        # print("hash val str0", hash_function_1("str0"))
 
         hash = hash_function_1(key)
         size = self.get_capacity()
@@ -111,9 +111,9 @@ class HashMap:
 
         # print(self._buckets[index].length())
         # if( self._buckets[index].length() == 0):
-
-        self._buckets[index].insert(key, value)
-        self._size += 1
+        if self._buckets[index].contains(key) is False:
+            self._buckets[index].insert(key, value)
+            self._size += 1
         # else:
         #     print("else")
 
@@ -383,4 +383,3 @@ if __name__ == "__main__":
         da = DynamicArray(case)
         mode, frequency = find_mode(da)
         print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}\n")
- 
