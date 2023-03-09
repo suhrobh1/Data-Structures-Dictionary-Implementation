@@ -112,19 +112,19 @@ class HashMap:
 
         # print(self.get_capacity())
 
-        # If there is node in the linked list at this index wit the same key, so need to overwrite
+        # If there is node in the linked list at this index with the same key, so need to overwrite
         if self._buckets[index].contains(key):
             node = self._buckets[index].contains(key)
             node.value = key_pair
-        # No two same keys 
+        # No two same keys
         else:
-            node = SLNode(key, key_pair) 
-            # Is linked list at this index empty
-            if self._buckets[index].length() == 0:
-                self._buckets[index].insert(key, key_pair) 
-                
-            # If linked list at this index is has a node
-            else:
+            # node = SLNode(key, key_pair) 
+            # If linked list at this index empty
+            #if self._buckets[index].length() == 0:
+            self._buckets[index].insert(key, key_pair) 
+            self._size += 1
+            # # If linked list at this index is has a node
+            # else:
 
             # temp = head.next
             # head.next = node
@@ -133,7 +133,7 @@ class HashMap:
 
 
             # self._buckets[index].value = key_pair
-            # self._size += 1
+          
      
 
     def empty_buckets(self) -> int:
@@ -172,9 +172,15 @@ class HashMap:
             new_bucket.append(LinkedList())
 
         for i in range(self.get_capacity()):
-          print("Bucket Contents", self._buckets[i])
+            print("Bucket Contents", self._buckets[i])
             #get the key, hash new index, and set in new array based on that index.
+            # self._buckets[i].
+            # hash = hash_function_1(key)
+            # size = self.get_capacity()
+            # index = hash % size
+            # print(index)
 
+        key_pair = (key, value)
             
         self._buckets = new_bucket
 
