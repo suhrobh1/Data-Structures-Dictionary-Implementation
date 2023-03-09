@@ -6,7 +6,7 @@
 # Description:
 
 from a6_include import (DynamicArray, LinkedList, hash_function_1,
-                        hash_function_2)
+                        hash_function_2, SLNode)
 
 
 class HashMap:
@@ -106,18 +106,34 @@ class HashMap:
         
         load_factor = self._size / self.get_capacity()
 
-        print(load_factor)
+        # print(load_factor)
         if load_factor >= 1:
             self.resize_table(self.get_capacity() * 2)
-        print(self.get_capacity())
 
+        # print(self.get_capacity())
 
+        # If there is node in the linked list at this index wit the same key, so need to overwrite
         if self._buckets[index].contains(key):
             node = self._buckets[index].contains(key)
             node.value = key_pair
+        # No two same keys 
         else:
-            self._buckets[index].insert(key, value)
-            self._size += 1
+            node = SLNode(key, key_pair) 
+            # Is linked list at this index empty
+            if self._buckets[index].length() == 0:
+                self._buckets[index].insert(key, key_pair) 
+                
+            # If linked list at this index is has a node
+            else:
+
+            # temp = head.next
+            # head.next = node
+            # node.next = temp
+            # temp = None
+
+
+            # self._buckets[index].value = key_pair
+            # self._size += 1
      
 
     def empty_buckets(self) -> int:
@@ -147,11 +163,20 @@ class HashMap:
         """
         TODO: Write this implementation
         """
+        new_capacity = self._next_prime(new_capacity)
+
+        # new bucket created
         new_bucket = DynamicArray()
+        # adding SLLs tothe new bucket
+        for _ in range(new_capacity):
+            new_bucket.append(LinkedList())
+
         for i in range(self.get_capacity()):
-            new_bucket.set_at_index(i, self._buckets[i])
-            # self._capacity = new_capacity
-            self._buckets = new_bucket
+          print("Bucket Contents", self._buckets[i])
+            #get the key, hash new index, and set in new array based on that index.
+
+            
+        self._buckets = new_bucket
 
     def get(self, key: str):
         """
