@@ -92,18 +92,13 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        
 
-        hash = hash_function_1(key)
+        
+        hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
-        # print(index)
-
-        # key_pair = (key, value)
-
-        # Check if rezise is needed. Use load factor for test (IMPORTANT TO self.size += 1)
-        # Check if value already exists
         
+               
         load_factor = self._size / self.get_capacity()
 
         # print(load_factor)
@@ -118,28 +113,16 @@ class HashMap:
             node.value = value
         # No two same keys
         else:
-            # node = SLNode(key, key_pair) 
-            # If linked list at this index empty
-            #if self._buckets[index].length() == 0:
             self._buckets[index].insert(key, value) 
             self._size += 1
-            # # If linked list at this index is has a node
-            # else:
 
-            # temp = head.next
-            # head.next = node
-            # node.next = temp
-            # temp = None
-
-
-            # self._buckets[index].value = key_pair
-          
-     
 
     def empty_buckets(self) -> int:
         """
         TODO: Write this implementation
         """
+        
+
         counter = 0
         for i in range(self.get_capacity()):
             if self._buckets[i].length() == 0:
@@ -186,7 +169,7 @@ class HashMap:
                 while node :
                     value = node.value
                     key = node.key
-                    hash = hash_function_1(key)
+                    hash = self._hash_function(key)
                     size = new_capacity
                     index = hash % size
                     new_bucket[index].insert(key, value)
@@ -233,15 +216,15 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
 
 if __name__ == "__main__":
 
-    print("\nPDF - put example 1")
-    print("-------------------")
-    m = HashMap(53, hash_function_1)
-    for i in range(150):
-        m.put('str' + str(i), i * 100)
-        if i % 25 == 24:
-            # print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(),
-            #       m.get_capacity())
-            print(m.get_capacity())
+    # print("\nPDF - put example 1")
+    # print("-------------------")
+    # m = HashMap(53, hash_function_1)
+    # for i in range(150):
+    #     m.put('str' + str(i), i * 100)
+    #     if i % 25 == 24:
+    #         print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(),
+    #               m.get_capacity())
+    #         # print(m.get_capacity())
 
     print("\nPDF - put example 2")
     print("-------------------")
