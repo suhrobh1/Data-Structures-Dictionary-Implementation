@@ -141,7 +141,7 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        self._buckets = None
+        self._buckets = DynamicArray()
         self._size = 0
 
     def resize_table(self, new_capacity: int) -> None:
