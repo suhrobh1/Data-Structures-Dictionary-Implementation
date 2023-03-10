@@ -147,7 +147,8 @@ class HashMap:
         TODO: Write this implementation
         """
         new_capacity = self._next_prime(new_capacity)
-
+        if new_capacity < 1:
+            return False
         # new bucket created
         new_bucket = DynamicArray()
         # adding SLLs tothe new bucket
