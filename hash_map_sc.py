@@ -99,7 +99,7 @@ class HashMap:
         index = hash % size
         # print(index)
 
-        key_pair = (key, value)
+        # key_pair = (key, value)
 
         # Check if rezise is needed. Use load factor for test (IMPORTANT TO self.size += 1)
         # Check if value already exists
@@ -115,13 +115,13 @@ class HashMap:
         # If there is node in the linked list at this index with the same key, so need to overwrite
         if self._buckets[index].contains(key):
             node = self._buckets[index].contains(key)
-            node.value = key_pair
+            node.value = value
         # No two same keys
         else:
             # node = SLNode(key, key_pair) 
             # If linked list at this index empty
             #if self._buckets[index].length() == 0:
-            self._buckets[index].insert(key, key_pair) 
+            self._buckets[index].insert(key, value) 
             self._size += 1
             # # If linked list at this index is has a node
             # else:
@@ -184,12 +184,12 @@ class HashMap:
                 node = sll_iterator.__next__()
                 print("node", node)
                 while node :
-                    key_pair = node.value
+                    value = node.value
                     key = node.key
                     hash = hash_function_1(key)
                     size = new_capacity
                     index = hash % size
-                    new_bucket[index].insert(key, key_pair)
+                    new_bucket[index].insert(key, value)
                     node = node.next
         
         self._capacity = new_capacity
