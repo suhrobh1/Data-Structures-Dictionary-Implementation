@@ -177,7 +177,8 @@ class HashMap:
         
         self._capacity = new_capacity
         self._buckets = new_bucket
-
+        return True
+    
     def get(self, key: str):
         """
         TODO: Write this implementation
