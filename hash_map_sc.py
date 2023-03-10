@@ -141,7 +141,8 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        self._buckets = None
+        self._size = 0
 
     def resize_table(self, new_capacity: int) -> None:
         """
