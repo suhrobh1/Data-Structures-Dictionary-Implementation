@@ -134,7 +134,8 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        load_factor = self._size / self.get_capacity()
+        return load_factor
 
     def clear(self) -> None:
         """
