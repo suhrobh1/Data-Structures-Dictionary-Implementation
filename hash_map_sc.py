@@ -174,15 +174,26 @@ class HashMap:
         for i in range(self.get_capacity()):
             print("Bucket Contents", self._buckets[i])
             #get the key, hash new index, and set in new array based on that index.
-            # self._buckets[i].
-            # hash = hash_function_1(key)
-            # size = self.get_capacity()
-            # index = hash % size
-            # print(index)
-
-        key_pair = (key, value)
-            
-        self._buckets = new_bucket
+            if self._buckets[i].length() == 0:
+                continue
+            else:
+                index = i
+                first_sll = self._buckets[i]
+                iterator_obj = self._buckets[i].__iter__()
+                sll_iterator = iterator_obj.__iter__()
+                node = sll_iterator.__next__()
+                print("node", node)
+                while node :
+                    key_pair = node.value
+                    key = node.key
+                    hash = hash_function_1(key)
+                    size = new_capacity
+                    index = hash % size
+                    new_bucket[index].insert(key, key_pair)
+                    node = node.next
+        
+            self._capacity = new_capacity
+            self._buckets = new_bucket
 
     def get(self, key: str):
         """
