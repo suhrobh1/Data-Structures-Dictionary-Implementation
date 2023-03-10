@@ -192,8 +192,8 @@ class HashMap:
                     new_bucket[index].insert(key, key_pair)
                     node = node.next
         
-            self._capacity = new_capacity
-            self._buckets = new_bucket
+        self._capacity = new_capacity
+        self._buckets = new_bucket
 
     def get(self, key: str):
         """
