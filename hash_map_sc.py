@@ -200,17 +200,21 @@ class HashMap:
             
             # new bucket created
             copy_bucket = self._buckets
-
+            copy_capacity = self._capacity 
+            
+            self._capacity = new_capacity
             self._buckets = DynamicArray()
+            self._size = 0
 
             # adding SLLs tothe new bucket
             for _ in range(new_capacity):
                 self._buckets.append(LinkedList())
 
-            for i in range(self._capacity): 
+
+            for i in range(copy_capacity): 
                 
                 #get the key, hash new index, and set in new array based on that index.
-                if self._buckets[i].length() == 0:
+                if copy_bucket[i].length() == 0:
                     continue
                
                 else:
@@ -218,17 +222,18 @@ class HashMap:
                     # sll_iterator = iterator_obj.__iter__()
                     # node = sll_iterator.__next__()
                    
-                    sll = self._buckets[i] 
+                    sll = copy_bucket[i] 
                     # print("SLL PRINT-------", node)
                     # Iteration through particular linked list
 
                     for node in sll:
                         value = node.value
                         key = node.key
+
                         self.put(node.key, node.value)
                          
             
-            self._capacity = new_capacity
+           
             return
 
 

@@ -91,15 +91,29 @@ class HashMap:
         """
         load_factor = self._size / self.get_capacity()
 
-        # print(load_factor)
-        if load_factor >= 1:
+        print(load_factor)
+        if load_factor >= 0.5:
             self.resize_table(self.get_capacity() * 2)
         
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
 
+        # # If location is not empty
+        # if self._buckets[index] is not None:
+        #     # Probe another location
+        #     index = index 
+        #     while index is not None:
 
+
+        location = self._buckets[index]
+        j = 1
+        while location is not None and index < self._capacity:
+            index = index + j * j 
+            location = self._buckets[index]
+            j += 1
+        self._buckets[index] = HashEntry(key, value)
+        self._size += 1
 
 
 
@@ -120,7 +134,7 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        print("RESIZE___________________________!")
 
     def get(self, key: str) -> object:
         """
