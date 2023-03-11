@@ -145,41 +145,41 @@ class HashMap:
         self._buckets = new_bucket
         self._size = 0
 
-    def resize_table(self, new_capacity: int) -> None:
-        """
-        TODO: Write this implementation
-        """
-        if self._is_prime(new_capacity) is False:
-            new_capacity = self._next_prime(new_capacity)
+    # def resize_table(self, new_capacity: int) -> None:
+    #     """
+    #     TODO: Write this implementation
+    #     """
+    #     if self._is_prime(new_capacity) is False:
+    #         new_capacity = self._next_prime(new_capacity)
 
-        # if new_capacity < 1:
-        #     return 
+    #     # if new_capacity < 1:
+    #     #     return 
         
-        # new bucket created
-        new_bucket = DynamicArray()
+    #     # new bucket created
+    #     new_bucket = DynamicArray()
 
-        # adding SLLs tothe new bucket
-        for _ in range(new_capacity):
-            new_bucket.append(LinkedList())
+    #     # adding SLLs tothe new bucket
+    #     for _ in range(new_capacity):
+    #         new_bucket.append(LinkedList())
 
-        for i in range(self.get_capacity()):
-            #get the key, hash new index, and set in new array based on that index.
-            if self._buckets[i].length() == 0:
-                continue
-            else:
-                iterator_obj = self._buckets[i].__iter__()
-                # sll_iterator = iterator_obj.__iter__()
-                node = iterator_obj.__next__()
-                # Iteration through particular linked list
-                while node :
-                    hash = self._hash_function(node.key)
-                    index = hash % new_capacity
-                    new_bucket[index].insert(node.key, node.value)
-                    node = node.next
+    #     for i in range(self.get_capacity()):
+    #         #get the key, hash new index, and set in new array based on that index.
+    #         if self._buckets[i].length() == 0:
+    #             continue
+    #         else:
+    #             iterator_obj = self._buckets[i].__iter__()
+    #             # sll_iterator = iterator_obj.__iter__()
+    #             node = iterator_obj.__next__()
+    #             # Iteration through particular linked list
+    #             while node :
+    #                 hash = self._hash_function(node.key)
+    #                 index = hash % new_capacity
+    #                 new_bucket[index].insert(node.key, node.value)
+    #                 node = node.next
         
-        self._capacity = new_capacity
-        self._buckets = new_bucket
-        return
+    #     self._capacity = new_capacity
+    #     self._buckets = new_bucket
+    #     return
     
 
 
@@ -187,64 +187,47 @@ class HashMap:
 
 
 
-    # def resize_table(self, new_capacity: int) -> None:
-    #         """
-    #         TODO: Write this implementation
-    #         """
-    #         if self._is_prime(new_capacity) is False:
-    #             new_capacity = self._next_prime(new_capacity)
+    def resize_table(self, new_capacity: int) -> None:
+            """
+            TODO: Write this implementation
+            """
+            if self._is_prime(new_capacity) is False:
+                new_capacity = self._next_prime(new_capacity)
 
-    #         # if new_capacity < 1:
-    #         #     return 
+            # if new_capacity < 1:
+            #     return 
             
-    #         # new bucket created
-    #         copy_bucket = self._buckets
+            # new bucket created
+            copy_bucket = self._buckets
 
-    #         self._buckets = DynamicArray()
+            self._buckets = DynamicArray()
 
-    #         # adding SLLs tothe new bucket
-    #         for _ in range(new_capacity):
-    #             self._buckets.append(LinkedList())
+            # adding SLLs tothe new bucket
+            for _ in range(new_capacity):
+                self._buckets.append(LinkedList())
 
-    #         for i in range(self._capacity): 
+            for i in range(self._capacity): 
                 
-    #             #get the key, hash new index, and set in new array based on that index.
-    #             if self._buckets[i].length() == 0:
-    #                 continue
+                #get the key, hash new index, and set in new array based on that index.
+                if self._buckets[i].length() == 0:
+                    continue
                
-    #             else:
-    #                 # iterator_obj = self._buckets[i].__iter__()
-    #                 # sll_iterator = iterator_obj.__iter__()
-    #                 # node = sll_iterator.__next__()
+                else:
+                    # iterator_obj = self._buckets[i].__iter__()
+                    # sll_iterator = iterator_obj.__iter__()
+                    # node = sll_iterator.__next__()
                    
-    #                 node = self._buckets[i].__iter__()
-    #                 print(node)
-    #                 # Iteration through particular linked list
-    #                 while node :
-    #                     value = node.value
-    #                     key = node.key
-    #                     self.put(node.key, node.value)
-    #                     node = node.next
+                    node = self._buckets[i].__iter__()
+                    print(node)
+                    # Iteration through particular linked list
+                    while node :
+                        value = node.value
+                        key = node.key
+                        self.put(node.key, node.value)
+                        node = node.next
             
-    #         self._capacity = new_capacity
-    #         return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            self._capacity = new_capacity
+            return
 
 
     def get(self, key: str):
