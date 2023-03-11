@@ -98,24 +98,21 @@ class HashMap:
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
-
-        # # If location is not empty
-        # if self._buckets[index] is not None:
-        #     # Probe another location
-        #     index = index 
-        #     while index is not None:
-
+        original_index = index
 
         location = self._buckets[index]
         j = 1
-        while location is not None and index < self._capacity:
-            index = index + j * j 
+        while location is not None:
+            if index >= self._capacity:
+                break
+            index = original_index + j * j 
             location = self._buckets[index]
             j += 1
+            
         self._buckets[index] = HashEntry(key, value)
         self._size += 1
 
-
+      
 
 
     def table_load(self) -> float:
