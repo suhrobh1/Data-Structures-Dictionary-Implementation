@@ -196,9 +196,8 @@ class HashMap:
         size = self.get_capacity()
         index = hash % size
         required_sll = self._buckets[index]
-        iterator_obj = self._buckets[i].__iter__()
-        sll_iterator = iterator_obj.__iter__()
-        node = sll_iterator.__next__()
+        iterator_obj = required_sll.__iter__()
+        node = iterator_obj.__next__()
         print("node", node)
         while node :
             if node.key == key:
