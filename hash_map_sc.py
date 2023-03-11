@@ -249,6 +249,7 @@ class HashMap:
         while node :
             if node.key == key:
                 self._buckets[index].remove(key)
+                self._size -= 1
             node = node.next
         return 
 
