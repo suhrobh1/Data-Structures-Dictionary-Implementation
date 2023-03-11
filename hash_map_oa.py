@@ -89,7 +89,20 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        load_factor = self._size / self.get_capacity()
+
+        # print(load_factor)
+        if load_factor >= 1:
+            self.resize_table(self.get_capacity() * 2)
+        
+        hash = self._hash_function(key)
+        size = self.get_capacity()
+        index = hash % size
+
+
+
+
+
 
     def table_load(self) -> float:
         """
