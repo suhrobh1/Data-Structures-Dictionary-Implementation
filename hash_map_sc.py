@@ -201,16 +201,17 @@ class HashMap:
             # new bucket created
             copy_bucket = self._buckets
             copy_capacity = self._capacity 
+
             
-            self._capacity = new_capacity
             self._buckets = DynamicArray()
             self._size = 0
+           
 
             # adding SLLs tothe new bucket
             for _ in range(new_capacity):
                 self._buckets.append(LinkedList())
 
-
+            self._capacity = new_capacity
             for i in range(copy_capacity): 
                 
                 #get the key, hash new index, and set in new array based on that index.
