@@ -257,7 +257,32 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        return_array = DynamicArray()
+
+        for i in range(self.get_capacity()):
+            #get the key, hash new index, and set in new array based on that index.
+            if self._buckets[i].length() == 0:
+                continue
+            else:
+                iterator_obj = self._buckets[i].__iter__()
+                sll_iterator = iterator_obj.__iter__()
+                node = sll_iterator.__next__()
+                # print("node", node)
+                while node:
+                    key_pair = (node.key, node.value)
+                    return_array.append(key_pair)
+                    node = node.next
+        return return_array
+
+
+
+
+
+
+
+
+
+
 
 
 def find_mode(da: DynamicArray) -> (DynamicArray, int):
