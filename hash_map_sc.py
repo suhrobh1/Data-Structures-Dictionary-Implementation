@@ -192,7 +192,19 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        hash = self._hash_function(key)
+        size = self.get_capacity()
+        index = hash % size
+        required_sll = self._buckets[index]
+        iterator_obj = self._buckets[i].__iter__()
+        sll_iterator = iterator_obj.__iter__()
+        node = sll_iterator.__next__()
+        print("node", node)
+        while node :
+            if node.key == key:
+                return node.value
+            node = node.next
+        return None
 
     def contains_key(self, key: str) -> bool:
         """
