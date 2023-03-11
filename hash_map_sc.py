@@ -121,8 +121,6 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        
-
         counter = 0
         for i in range(self.get_capacity()):
             if self._buckets[i].length() == 0:
@@ -214,7 +212,24 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        if self._size == 0:
+            return False
+        hash = self._hash_function(key)
+        size = self.get_capacity()
+        index = hash % size
+        
+        if self._buckets[index].length() == 0:
+            return None
+        iterator_obj = self._buckets[index].__iter__()
+        sll_iterator = iterator_obj.__iter__()
+        node = sll_iterator.__next__()
+        print("node", node)
+        while node :
+            if node.key == key:
+                return True
+            node = node.next
+        return False
+
 
     def remove(self, key: str) -> None:
         """
@@ -358,22 +373,22 @@ if __name__ == "__main__":
     #     print(capacity, result, m.get_size(), m.get_capacity(),
     #           round(m.table_load(), 2))
 
-    print("\nPDF - get example 1")
-    print("-------------------")
-    m = HashMap(31, hash_function_1)
-    print(m.get('key'))
-    m.put('key1', 10)
-    print(m.get('key1'))
+    # print("\nPDF - get example 1")
+    # print("-------------------")
+    # m = HashMap(31, hash_function_1)
+    # print(m.get('key'))
+    # m.put('key1', 10)
+    # print(m.get('key1'))
 
-    print("\nPDF - get example 2")
-    print("-------------------")
-    m = HashMap(151, hash_function_2)
-    for i in range(200, 300, 7):
-        m.put(str(i), i * 10)
-    print(m.get_size(), m.get_capacity())
-    for i in range(200, 300, 21):
-        print(i, m.get(str(i)), m.get(str(i)) == i * 10)
-        print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
+    # print("\nPDF - get example 2")
+    # print("-------------------")
+    # m = HashMap(151, hash_function_2)
+    # for i in range(200, 300, 7):
+    #     m.put(str(i), i * 10)
+    # print(m.get_size(), m.get_capacity())
+    # for i in range(200, 300, 21):
+    #     print(i, m.get(str(i)), m.get(str(i)) == i * 10)
+    #     print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
 
     print("\nPDF - contains_key example 1")
     print("----------------------------")
