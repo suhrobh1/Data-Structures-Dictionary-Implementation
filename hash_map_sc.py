@@ -217,9 +217,9 @@ class HashMap:
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
-        
+
         if self._buckets[index].length() == 0:
-            return None
+            return False
         iterator_obj = self._buckets[index].__iter__()
         sll_iterator = iterator_obj.__iter__()
         node = sll_iterator.__next__()
