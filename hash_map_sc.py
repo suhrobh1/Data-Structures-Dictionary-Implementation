@@ -192,6 +192,9 @@ class HashMap:
             """
             TODO: Write this implementation
             """
+            if (new_capacity < self._size):
+                return
+
             if self._is_prime(new_capacity) is False:
                 new_capacity = self._next_prime(new_capacity)
 
