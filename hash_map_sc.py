@@ -172,12 +172,9 @@ class HashMap:
                 node = iterator_obj.__next__()
                 # Iteration through particular linked list
                 while node :
-                    value = node.value
-                    key = node.key
-                    hash = self._hash_function(key)
-                    size = new_capacity
-                    index = hash % size
-                    new_bucket[index].insert(key, value)
+                    hash = self._hash_function(node.key)
+                    index = hash % new_capacity
+                    new_bucket[index].insert(node.key, node.value)
                     node = node.next
         
         self._capacity = new_capacity
