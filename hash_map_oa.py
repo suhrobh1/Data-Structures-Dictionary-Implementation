@@ -102,15 +102,8 @@ class HashMap:
 
         
         # If not location is not empty and key values are same
-        
-        if self._buckets[index] is None:
-            self._buckets[index] = HashEntry(key, value)
-            self._size += 1
-            return
-        
         if self._buckets[index] is not None:
             if self._buckets[index].key == key:
-                print("keys match")
                 self._buckets[index].value = value
                 return
             else:
@@ -125,6 +118,10 @@ class HashMap:
                         return
                     index = (original_index + j * j) % self._capacity
                     j += 1
+        elif self._buckets[index] is None:
+            self._buckets[index] = HashEntry(key, value)
+            self._size += 1
+        
         
        
 
