@@ -110,9 +110,12 @@ class HashMap:
         #     j += 1
 
         j = 1
-        while index >= self._capacity:
+        # print("before while loop", index, self._capacity)
+        while index < self._capacity:
             location = self._buckets[index]
+            print("location", location)
             if location is None:
+                print("location is none")
                 self._buckets[index] = HashEntry(key, value)
                 self._size += 1
             index = original_index + j * j 
