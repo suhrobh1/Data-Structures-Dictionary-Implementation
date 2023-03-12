@@ -91,7 +91,7 @@ class HashMap:
         """
         load_factor = self._size / self.get_capacity()
 
-        print(load_factor)
+        # print(load_factor)
         if load_factor >= 0.5:
             self.resize_table(self.get_capacity() * 2)
         
@@ -119,7 +119,9 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+
+        load_factor = self._size / self.get_capacity()
+        return load_factor
 
     def empty_buckets(self) -> int:
         """
@@ -131,7 +133,41 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        print("RESIZE___________________________!")
+        print("-------IN RESIZE----------")
+        if new_capacity < self._size:
+            return
+        
+        if self._is_prime(new_capacity) is False:
+                new_capacity = self._next_prime(new_capacity)
+
+
+        # new bucket created
+        copy_bucket = self._buckets
+        copy_capacity = self._capacity 
+        self._capacity = new_capacity
+
+        self._buckets = DynamicArray()
+        self._size = 0
+
+        
+
+        # Adding basically placeholders
+        for _ in range(self._capacity):
+            self._buckets.append(None)
+
+        
+       
+        for i in range(copy_capacity):
+            item = copy_bucket[i]
+            if item:
+                # print("The item", item.key)
+                
+                self.put(item.key, item.value)
+
+        return
+
+
+
 
     def get(self, key: str) -> object:
         """

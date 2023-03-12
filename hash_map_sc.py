@@ -197,10 +197,7 @@ class HashMap:
             if self._is_prime(new_capacity) is False:
                 new_capacity = self._next_prime(new_capacity)
 
-            
-            # if new_capacity < 1:
-            #     return 
-            
+                      
             # new bucket created
             copy_bucket = self._buckets
             copy_capacity = self._capacity 
