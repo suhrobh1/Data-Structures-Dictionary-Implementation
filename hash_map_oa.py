@@ -146,7 +146,7 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        print("-------IN RESIZE----------")
+        # print("-------IN RESIZE----------")
         if new_capacity < self._size:
             return
         
