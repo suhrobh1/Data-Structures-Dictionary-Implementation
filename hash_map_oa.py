@@ -118,6 +118,7 @@ class HashMap:
                 # print("location is none")
                 self._buckets[index] = HashEntry(key, value)
                 self._size += 1
+                return
             index = original_index + j * j 
             j += 1
         
@@ -168,7 +169,7 @@ class HashMap:
         for _ in range(new_capacity):
             self._buckets.append(None)
 
-        
+        # Updating the capacity
         self._capacity = new_capacity
         for i in range(copy_capacity):
             item = copy_bucket[i]
