@@ -100,17 +100,27 @@ class HashMap:
         index = hash % size
         original_index = index
 
-        location = self._buckets[index]
+        # location = self._buckets[index]
+        # j = 1
+        # while location is not None:
+        #     if index >= self._capacity:
+        #         break
+        #     index = original_index + j * j 
+        #     location = self._buckets[index]
+        #     j += 1
+
         j = 1
-        while location is not None:
-            if index >= self._capacity:
-                break
-            index = original_index + j * j 
+        while index >= self._capacity:
             location = self._buckets[index]
+            if location is None:
+                self._buckets[index] = HashEntry(key, value)
+                self._size += 1
+            index = original_index + j * j 
             j += 1
+        
             
-        self._buckets[index] = HashEntry(key, value)
-        self._size += 1
+        # self._buckets[index] = HashEntry(key, value)
+        # self._size += 1
 
       
 
@@ -144,7 +154,7 @@ class HashMap:
         # new bucket created
         copy_bucket = self._buckets
         copy_capacity = self._capacity 
-        self._capacity = new_capacity
+        
 
         self._buckets = DynamicArray()
         self._size = 0
@@ -152,11 +162,11 @@ class HashMap:
         
 
         # Adding basically placeholders
-        for _ in range(self._capacity):
+        for _ in range(new_capacity):
             self._buckets.append(None)
 
         
-       
+        self._capacity = new_capacity
         for i in range(copy_capacity):
             item = copy_bucket[i]
             if item:
