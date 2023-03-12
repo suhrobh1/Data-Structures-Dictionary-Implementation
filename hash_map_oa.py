@@ -100,34 +100,30 @@ class HashMap:
         index = hash % size
         original_index = index
 
-        # location = self._buckets[index]
-        # j = 1
-        # while location is not None:
-        #     if index >= self._capacity:
-        #         break
-        #     index = original_index + j * j 
-        #     location = self._buckets[index]
-        #     j += 1
+        
+        # If not location is not empty and key values are same
         if self._buckets[index] is not None:
             if self._buckets[index].key == key:
                 self._buckets[index].value = value
                 return
-
-        j = 1
-        while index < self._capacity:
-            location = self._buckets[index]
-            # print("location", location)
-            if location is None:
-                # print("location is none")
-                self._buckets[index] = HashEntry(key, value)
-                self._size += 1
-                return
-            index = original_index + j * j 
-            j += 1
+            else:
+                j = 1
+                while index < self._capacity:
+                    location = self._buckets[index]
+                    # print("location", location)
+                    if location is None:
+                        # print("location is none")
+                        self._buckets[index] = HashEntry(key, value)
+                        self._size += 1
+                        return
+                    index = original_index + j * j 
+                    j += 1
+        elif self._buckets[index] is None:
+            self._buckets[index] = HashEntry(key, value)
+            self._size += 1
         
-            
-        # self._buckets[index] = HashEntry(key, value)
-        # self._size += 1
+        
+       
 
       
 
@@ -157,28 +153,27 @@ class HashMap:
         if self._is_prime(new_capacity) is False:
                 new_capacity = self._next_prime(new_capacity)
 
-
-        # new bucket created
+        # Copying existing array and its capacity
         copy_bucket = self._buckets
         copy_capacity = self._capacity 
         
-
+        # resetting the exisitng array and size
         self._buckets = DynamicArray()
         self._size = 0
 
         
 
-        # Adding basically placeholders
+        # Adding basically placeholders to the reset array
         for _ in range(new_capacity):
             self._buckets.append(None)
 
         # Updating the capacity
         self._capacity = new_capacity
+
+        # Adding the elements from copy of array to the reset array via put function
         for i in range(copy_capacity):
             item = copy_bucket[i]
             if item:
-                # print("The item", item.key)
-                
                 self.put(item.key, item.value)
 
         return
