@@ -116,7 +116,7 @@ class HashMap:
                         self._buckets[index] = HashEntry(key, value)
                         self._size += 1
                         return
-                    index = original_index + j * j 
+                    index = (original_index + j * j) % self._capacity
                     j += 1
         elif self._buckets[index] is None:
             self._buckets[index] = HashEntry(key, value)
