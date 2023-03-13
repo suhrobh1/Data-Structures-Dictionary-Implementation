@@ -108,6 +108,9 @@ class HashMap:
             # If keys match, replace value
             if self._buckets[index].key == key:
                 self._buckets[index].value = value
+                if self._buckets[index].is_tombstone is True:
+                    self._buckets[index].is_tombstone = False
+                    self._size += 1
                 return
             # Increment index
             index = (original_index + j * j) % self._capacity
@@ -156,13 +159,12 @@ class HashMap:
         
         # resetting the exisitng array and size
         self._buckets = DynamicArray()
-        
-
+        self._size = 0
         
         # Adding basically placeholders to the reset array
         for _ in range(new_capacity):
             self._buckets.append(None)
-        self._size = 0
+        
 
         # Updating the capacity
         self._capacity = new_capacity
