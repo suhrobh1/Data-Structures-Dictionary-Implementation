@@ -144,46 +144,6 @@ class HashMap:
         self._size = 0
 
 
-    # def resize_table(self, new_capacity: int) -> None:
-    #     """
-    #     TODO: Write this implementation
-    #     """
-    #     if self._is_prime(new_capacity) is False:
-    #         new_capacity = self._next_prime(new_capacity)
-
-    #     # if new_capacity < 1:
-    #     #     return 
-        
-    #     # new bucket created
-    #     new_bucket = DynamicArray()
-
-    #     # adding SLLs tothe new bucket
-    #     for _ in range(new_capacity):
-    #         new_bucket.append(LinkedList())
-
-    #     for i in range(self.get_capacity()):
-    #         #get the key, hash new index, and set in new array based on that index.
-    #         if self._buckets[i].length() == 0:
-    #             continue
-    #         else:
-    #             iterator_obj = self._buckets[i].__iter__()
-    #             # sll_iterator = iterator_obj.__iter__()
-    #             node = iterator_obj.__next__()
-    #             # Iteration through particular linked list
-    #             while node :
-    #                 hash = self._hash_function(node.key)
-    #                 index = hash % new_capacity
-    #                 new_bucket[index].insert(node.key, node.value)
-    #                 node = node.next
-        
-    #     self._capacity = new_capacity
-    #     self._buckets = new_bucket
-    #     return
-    
-
-
-
-
 
 
     def resize_table(self, new_capacity: int) -> None:
