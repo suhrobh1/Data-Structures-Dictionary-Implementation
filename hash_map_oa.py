@@ -214,10 +214,21 @@ class HashMap:
         size = self.get_capacity()
         index = hash % size
 
+        original_index = index
+
         if self._buckets[index]:
             if self._buckets[index].key == key:
-                    return True
-            
+                return True
+            else:
+                location = self._buckets[index]
+                while location is not None:
+                    if self._buckets[index].key == key:
+                        return True
+                    index = (original_index + j * j) % self._capacity
+                    if index >= self._capacity:
+                        break
+                    else:
+                        location = self._buckets[index]
         return False
 
 
