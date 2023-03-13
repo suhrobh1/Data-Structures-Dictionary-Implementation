@@ -215,7 +215,7 @@ class HashMap:
         index = hash % size
 
         if self._buckets[index]:
-            if self._buckets[i].key == key:
+            if self._buckets[index].key == key:
                     return True
             
         return False
