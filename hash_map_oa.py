@@ -257,14 +257,15 @@ class HashMap:
         location = self._buckets[index]
         while location is not None:
             if self._buckets[index].key == key:
-                return True
+                self._buckets[index].is_tombstone = True
+                return
             index = (original_index + j * j) % self._capacity
             j += 1
             if index >= self._capacity:
                 break
             else:
                 location = self._buckets[index]
-        return False
+        
 
 
 
@@ -456,15 +457,15 @@ if __name__ == "__main__":
     #     result &= not m.contains_key(str(key + 1))
     # print(result)
 
-    # print("\nPDF - remove example 1")
-    # print("----------------------")
-    # m = HashMap(53, hash_function_1)
-    # print(m.get('key1'))
-    # m.put('key1', 10)
-    # print(m.get('key1'))
-    # m.remove('key1')
-    # print(m.get('key1'))
-    # m.remove('key4')
+    print("\nPDF - remove example 1")
+    print("----------------------")
+    m = HashMap(53, hash_function_1)
+    print(m.get('key1'))
+    m.put('key1', 10)
+    print(m.get('key1'))
+    m.remove('key1')
+    print(m.get('key1'))
+    m.remove('key4')
 
     # print("\nPDF - clear example 1")
     # print("---------------------")
