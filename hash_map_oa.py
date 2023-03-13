@@ -258,6 +258,7 @@ class HashMap:
         while location is not None:
             if self._buckets[index].key == key:
                 self._buckets[index].is_tombstone = True
+                self._size -= 1
                 return
             index = (original_index + j * j) % self._capacity
             j += 1
