@@ -105,17 +105,20 @@ class HashMap:
 
         # While the location is currently busy, continue looking
         while location is not None:
+            # If keys match, replace value
             if self._buckets[index].key == key:
                 self._buckets[index].value = value
                 return
+            # Increment index
             index = (original_index + j * j) % self._capacity
             j += 1
+            # If index gets higher than capacity (Maybe dont need this check?)
             if index >= self._capacity:
-                print("index cond check Flag 2")
-                break
+                return
             else:
                 location = self._buckets[index]
 
+        # Add the hash entry at given index and increment size
         self._buckets[index] = HashEntry(key, value)
         self._size += 1
         
@@ -160,7 +163,7 @@ class HashMap:
         for _ in range(new_capacity):
             self._buckets.append(None)
         self._size = 0
-        
+
         # Updating the capacity
         self._capacity = new_capacity
 
@@ -168,7 +171,8 @@ class HashMap:
         for i in range(copy_capacity):
             item = copy_bucket[i]
             if item:
-                self.put(item.key, item.value)
+                if item.is_tombstone is False:
+                    self.put(item.key, item.value)
 
         return
 
