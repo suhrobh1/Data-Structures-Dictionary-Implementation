@@ -275,14 +275,6 @@ class HashMap:
 
 
 
-
-
-
-
-
-
-
-
     def clear(self) -> None:
         """
         TODO: Write this implementation
@@ -306,18 +298,29 @@ class HashMap:
                     return_array.append(key_pair)
         
         return return_array
+    
 
     def __iter__(self):
         """
-        TODO: Write this implementation
+        Create iterator for loop
         """
-        pass
+        self._index = 0
+
+        return self
 
     def __next__(self):
         """
-        TODO: Write this implementation
+        Obtain next value and advance iterator
         """
-        pass
+        try:
+            value = self._buckets[self._index]
+        except DynamicArrayException:
+            raise StopIteration
+
+        self._index = self._index + 1
+        return value
+
+
 
 
 # ------------------- BASIC TESTING ---------------------------------------- #
