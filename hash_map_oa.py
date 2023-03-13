@@ -94,55 +94,15 @@ class HashMap:
         # print(load_factor)
         if load_factor >= 0.5:
             self.resize_table(self.get_capacity() * 2)
-        
-        # hash = self._hash_function(key)
-        # size = self.get_capacity()
-        # index = hash % size
-        # original_index = index
-        
-        
-        # # If not location is not empty
-        # if self._buckets[index] is None:
-        #     self._buckets[index] = HashEntry(key, value)
-        #     self._size += 1
-        #     return
-        # # If location is not empty
-        # elif self._buckets[index] is not None:
-        #     # If keys equal 
-        #     if self._buckets[index].key == key:
-        #         self._buckets[index].value = value
-        #         return
-        #     # If keys do not equal, need to probe to get to empty spot
-        #     else:
-        #         j = 1
-        #         while index < self._capacity:
-        #             location = self._buckets[index]
-        #             # print("location", location)
-        #             # If locaiton is empty, add the item
-        #             if location is None:
-        #                 # print("location is none")
-        #                 self._buckets[index] = HashEntry(key, value)
-        #                 self._size += 1
-        #                 return
-        #             # If location is not empty, check to see if keys
-        #             else:
-        #                 if self._buckets[index].key == key:
-        #                     self._buckets[index].value = value
-        #                     return
-        #             index = (original_index + j * j) % self._capacity
-        #             j += 1
-                
-
-
 
 
         hash = self._hash_function(key)
-        size = self.get_capacity()
-        index = hash % size
+        index = hash % self.get_capacity()
         original_index = index
 
         j = 1
         location = self._buckets[index]
+
         # While the location is currently busy, continue looking
         while location is not None:
             if self._buckets[index].key == key:
@@ -151,6 +111,7 @@ class HashMap:
             index = (original_index + j * j) % self._capacity
             j += 1
             if index >= self._capacity:
+                print("index cond check Flag 2")
                 break
             else:
                 location = self._buckets[index]
@@ -159,10 +120,6 @@ class HashMap:
         self._size += 1
         
         
-       
-
-      
-
 
     def table_load(self) -> float:
         """
@@ -196,14 +153,14 @@ class HashMap:
         
         # resetting the exisitng array and size
         self._buckets = DynamicArray()
-        self._size = 0
-
         
 
+        
         # Adding basically placeholders to the reset array
         for _ in range(new_capacity):
             self._buckets.append(None)
-
+        self._size = 0
+        
         # Updating the capacity
         self._capacity = new_capacity
 
@@ -293,10 +250,6 @@ class HashMap:
             else:
                 location = self._buckets[index]
         
-
-
-
-
 
 
     def clear(self) -> None:
