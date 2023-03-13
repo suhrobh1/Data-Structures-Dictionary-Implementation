@@ -101,11 +101,18 @@ class HashMap:
         original_index = index
         
         
-        # If not location is not empty and key values are same
-        if self._buckets[index] is not None:
+        # If not location is not empty
+        if self._buckets[index] is None:
+            self._buckets[index] = HashEntry(key, value)
+            self._size += 1
+            return
+        # If location is not empty
+        elif self._buckets[index] is not None:
+            # If keys equal 
             if self._buckets[index].key == key:
                 self._buckets[index].value = value
                 return
+            # If keys do not equal, need to probe to get to empty spot
             else:
                 j = 1
                 while index < self._capacity:
@@ -123,9 +130,7 @@ class HashMap:
                     index = (original_index + j * j) % self._capacity
                     j += 1
                 
-        elif self._buckets[index] is None:
-            self._buckets[index] = HashEntry(key, value)
-            self._size += 1
+        
         
         
        
