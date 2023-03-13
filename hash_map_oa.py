@@ -201,9 +201,20 @@ class HashMap:
         size = self.get_capacity()
         index = hash % size
 
-        if self._buckets[index]:
-            return self._buckets[index].value
-        return False
+        original_index = index
+
+        j = 1
+        location = self._buckets[index]
+        while location is not None:
+            if self._buckets[index].key == key:
+                return self._buckets[index].value
+            index = (original_index + j * j) % self._capacity
+            j += 1
+            if index >= self._capacity:
+                break
+            else:
+                location = self._buckets[index]
+        return None
 
     def contains_key(self, key: str) -> bool:
         """
@@ -216,10 +227,6 @@ class HashMap:
 
         original_index = index
 
-        # if self._buckets[index]:
-        #     if self._buckets[index].key == key:
-        #         return True
-        #     else:
         j = 1
         location = self._buckets[index]
         while location is not None:
@@ -231,15 +238,8 @@ class HashMap:
                 break
             else:
                 location = self._buckets[index]
-                
         return False
 
-
-        # for i in range(self._capacity):
-        #     if self._buckets[i]:
-        #         if self._buckets[i].key == key:
-        #             return True
-        # return False
 
     def remove(self, key: str) -> None:
         """
