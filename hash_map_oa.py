@@ -197,18 +197,33 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        hash = self._hash_function(key)
+        size = self.get_capacity()
+        index = hash % size
+
+        if self._buckets[index]:
+            return self._buckets[index].value
+        return False
 
     def contains_key(self, key: str) -> bool:
         """
         TODO: Write this implementation
         """
         
-        for i in range(self._capacity):
-            if self._buckets[i]:
-                if self._buckets[i].key == key:
-                    return True
+        hash = self._hash_function(key)
+        size = self.get_capacity()
+        index = hash % size
+
+        if self._buckets[index]:
+            return True
         return False
+
+
+        # for i in range(self._capacity):
+        #     if self._buckets[i]:
+        #         if self._buckets[i].key == key:
+        #             return True
+        # return False
 
     def remove(self, key: str) -> None:
         """
@@ -346,22 +361,22 @@ if __name__ == "__main__":
     #         result &= not m.contains_key(str(key + 1))
     #     print(capacity, result, m.get_size(), m.get_capacity(), round(m.table_load(), 2))
 
-    # print("\nPDF - get example 1")
-    # print("-------------------")
-    # m = HashMap(31, hash_function_1)
-    # print(m.get('key'))
-    # m.put('key1', 10)
-    # print(m.get('key1'))
+    print("\nPDF - get example 1")
+    print("-------------------")
+    m = HashMap(31, hash_function_1)
+    print(m.get('key'))
+    m.put('key1', 10)
+    print(m.get('key1'))
 
-    # print("\nPDF - get example 2")
-    # print("-------------------")
-    # m = HashMap(151, hash_function_2)
-    # for i in range(200, 300, 7):
-    #     m.put(str(i), i * 10)
-    # print(m.get_size(), m.get_capacity())
-    # for i in range(200, 300, 21):
-    #     print(i, m.get(str(i)), m.get(str(i)) == i * 10)
-    #     print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
+    print("\nPDF - get example 2")
+    print("-------------------")
+    m = HashMap(151, hash_function_2)
+    for i in range(200, 300, 7):
+        m.put(str(i), i * 10)
+    print(m.get_size(), m.get_capacity())
+    for i in range(200, 300, 21):
+        print(i, m.get(str(i)), m.get(str(i)) == i * 10)
+        print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
 
     # print("\nPDF - contains_key example 1")
     # print("----------------------------")
@@ -426,20 +441,20 @@ if __name__ == "__main__":
     # m.clear()
     # print(m.get_size(), m.get_capacity())
 
-    print("\nPDF - get_keys_and_values example 1")
-    print("------------------------")
-    m = HashMap(11, hash_function_2)
-    for i in range(1, 6):
-        m.put(str(i), str(i * 10))
-    print(m.get_keys_and_values())
+    # print("\nPDF - get_keys_and_values example 1")
+    # print("------------------------")
+    # m = HashMap(11, hash_function_2)
+    # for i in range(1, 6):
+    #     m.put(str(i), str(i * 10))
+    # print(m.get_keys_and_values())
 
-    m.resize_table(2)
-    print(m.get_keys_and_values())
+    # m.resize_table(2)
+    # print(m.get_keys_and_values())
 
-    m.put('20', '200')
-    m.remove('1')
-    m.resize_table(12)
-    print(m.get_keys_and_values())
+    # m.put('20', '200')
+    # m.remove('1')
+    # m.resize_table(12)
+    # print(m.get_keys_and_values())
 
     # print("\nPDF - __iter__(), __next__() example 1")
     # print("---------------------")
