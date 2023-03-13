@@ -246,7 +246,22 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        
+        hash = self._hash_function(key)
+        size = self.get_capacity()
+        index = hash % size
+
+
+
+
+
+
+
+
+
+
+
+
 
     def clear(self) -> None:
         """
@@ -266,8 +281,9 @@ class HashMap:
 
         for i in range(self._capacity):
             if self._buckets[i]:
-                key_pair = (self._buckets[i].key, self._buckets[i].value)
-                return_array.append(key_pair)
+                if self._buckets[i].is_tomstone is False:
+                    key_pair = (self._buckets[i].key, self._buckets[i].value)
+                    return_array.append(key_pair)
         
         return return_array
 
