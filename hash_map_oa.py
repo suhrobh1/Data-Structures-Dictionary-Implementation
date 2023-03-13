@@ -152,7 +152,8 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        return self._capacity - self._size
+
 
     def resize_table(self, new_capacity: int) -> None:
         """
