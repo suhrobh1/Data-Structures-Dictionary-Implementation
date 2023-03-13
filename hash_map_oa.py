@@ -312,9 +312,9 @@ class HashMap:
         """
         Obtain next value and advance iterator
         """
-        print("self._index", self._index, self._capacity)
+        # print("self._index", self._index, self._capacity)
         if self._index >= self._capacity:
-            return
+            raise StopIteration
 
         while self._index < self._capacity:
             if self._buckets[self._index] is not None:
@@ -326,8 +326,8 @@ class HashMap:
                     self._index = self._index + 1
             else:
                 self._index = self._index + 1
-            
-
+        
+        raise StopIteration 
         
         # try:
         #     value = self._buckets[self._index]
@@ -547,5 +547,5 @@ if __name__ == "__main__":
     m.remove('4')
     print(m)
     for item in m:
-        print("Here here", item)
-        #print('K:', item.key, 'V:', item.value)
+        # print("Here here", item)
+        print('K:', item.key, 'V:', item.value)
