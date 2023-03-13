@@ -99,7 +99,7 @@ class HashMap:
         size = self.get_capacity()
         index = hash % size
         original_index = index
-
+        
         
         # If not location is not empty and key values are same
         if self._buckets[index] is not None:
@@ -116,8 +116,13 @@ class HashMap:
                         self._buckets[index] = HashEntry(key, value)
                         self._size += 1
                         return
+                    else:
+                        if self._buckets[index].key == key:
+                            self._buckets[index].value = value
+                            return
                     index = (original_index + j * j) % self._capacity
                     j += 1
+                
         elif self._buckets[index] is None:
             self._buckets[index] = HashEntry(key, value)
             self._size += 1
@@ -191,7 +196,12 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        
+        for i in range(self._capacity):
+            if self._buckets[i]:
+                if self._buckets[i].key == key:
+                    return True
+        return False
 
     def remove(self, key: str) -> None:
         """
