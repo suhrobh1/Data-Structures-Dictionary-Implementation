@@ -118,11 +118,13 @@ class HashMap:
                 while index < self._capacity:
                     location = self._buckets[index]
                     # print("location", location)
+                    # If locaiton is empty, add the item
                     if location is None:
                         # print("location is none")
                         self._buckets[index] = HashEntry(key, value)
                         self._size += 1
                         return
+                    # If location is not empty, check to see if keys
                     else:
                         if self._buckets[index].key == key:
                             self._buckets[index].value = value
