@@ -209,17 +209,6 @@ class HashMap:
 
         if self._buckets[index].length() == 0:
             return None
-        
-        # iterator_obj = self._buckets[index].__iter__()
-        # sll_iterator = iterator_obj.__iter__()
-        # node = sll_iterator.__next__()
-        # # print("node", node)
-        
-        # while node :
-        #     if node.key == key:
-        #         return node.value
-        #     node = node.next
-        # return None
     
         sll = self._buckets[index]
 
@@ -245,15 +234,32 @@ class HashMap:
 
         if self._buckets[index].length() == 0:
             return False
-        iterator_obj = self._buckets[index].__iter__()
-        sll_iterator = iterator_obj.__iter__()
-        node = sll_iterator.__next__()
-        # print("node", node)
-        while node :
+        
+
+        # iterator_obj = self._buckets[index].__iter__()
+        # sll_iterator = iterator_obj.__iter__()
+        # node = sll_iterator.__next__()
+        # # print("node", node)
+        # while node :
+        #     if node.key == key:
+        #         return True
+        #     node = node.next
+        # return False
+    
+        sll = self._buckets[index]
+
+        for node in sll:
             if node.key == key:
                 return True
             node = node.next
         return False
+
+
+
+
+
+
+
 
 
     def remove(self, key: str) -> None:
