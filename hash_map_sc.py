@@ -269,43 +269,112 @@ class HashMap:
         return return_array
 
 
+# def find_mode(da: DynamicArray) -> (DynamicArray, int):
+#     """
+#     Returns tuple of Dynamic array which contains mode elements and integer which is frequency.
+#     """
+#     map = HashMap()
+    
+#     # Iterating over the passed DA and adding it to map
+#     for i in range(da.length()):
+#         # If if element is not in map
+#         if map.contains_key(da[i]) is False:
+#             map.put(da[i], 1)
+#         # If element is in map, then we increment the value (frequency)
+#         else:
+#            value =  map.get(da[i]) + 1
+#            map.put(da[i], value)
+    
+#     # Variables that will hold frequency and mode elements
+#     frequency = 1
+#     mode_items = DynamicArray()
+
+#     # Iterating and adding the elements into DA if meets mode requirement
+#     for i in range(map.get_capacity()):
+#         # If not empty
+#         if map._buckets._data[i].length() != 0:
+#             sll = map._buckets._data[i]
+#             # If the SLL has multple nodes, we go through them
+#             for node in sll:
+#                 if node.value > frequency:
+#                     frequency = node.value
+#                     mode_items= DynamicArray()
+#                     mode_items.append(node.key)
+#                 elif node.value == frequency:
+#                     mode_items.append(node.key)
+#                 node = node.next
+#     return mode_items, frequency
+
+
+
+
+
+
 def find_mode(da: DynamicArray) -> (DynamicArray, int):
     """
     Returns tuple of Dynamic array which contains mode elements and integer which is frequency.
     """
     map = HashMap()
-
+    frequency = 1
+    mode_items = DynamicArray()
+    
     # Iterating over the passed DA and adding it to map
     for i in range(da.length()):
         # If if element is not in map
         if map.contains_key(da[i]) is False:
             map.put(da[i], 1)
+            if frequency == 1:
+                mode_items.append(da[i])
         # If element is in map, then we increment the value (frequency)
         else:
            value =  map.get(da[i]) + 1
+           if value > frequency:
+               frequency = value
+               mode_items = DynamicArray()
+               mode_items.append(da[i])
+           elif value == frequency:
+               mode_items.append(da[i])
            map.put(da[i], value)
     
     # Variables that will hold frequency and mode elements
-    frequency = 1
-    mode_items = DynamicArray()
+
 
     # Iterating and adding the elements into DA if meets mode requirement
-    for i in range(map.get_capacity()):
-        # If not empty
-        if map._buckets._data[i].length() != 0:
-            sll = map._buckets._data[i]
-            # If the SLL has multple nodes, we go through them
-            for node in sll:
-                if node.value > frequency:
-                    frequency = node.value
-                    mode_items= DynamicArray()
-                    mode_items.append(node.key)
-                elif node.value == frequency:
-                    mode_items.append(node.key)
-                node = node.next
+    # for i in range(map.get_capacity()):
+    #     # If not empty
+    #     if map._buckets._data[i].length() != 0:
+    #         sll = map._buckets._data[i]
+    #         # If the SLL has multple nodes, we go through them
+    #         for node in sll:
+    #             if node.value > frequency:
+    #                 frequency = node.value
+    #                 mode_items= DynamicArray()
+    #                 mode_items.append(node.key)
+    #             elif node.value == frequency:
+    #                 mode_items.append(node.key)
+    #             node = node.next
     return mode_items, frequency
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 # ------------------- BASIC TESTING ---------------------------------------- #
 
 if __name__ == "__main__":
