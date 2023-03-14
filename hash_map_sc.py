@@ -299,18 +299,34 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
         else:
            value =  map.get(da[i]) + 1
            map.put(da[i], value)
-
+    print(map)
     frequency = 1
     mode_items = DynamicArray()
 
+    # for i in range(map.get_capacity()):
+    #     if map._buckets._data[i].length() != 0:
+    #         if map._buckets._data[i]._head.value > frequency:
+    #             frequency = map._buckets._data[i]._head.value
+    #             mode_items= DynamicArray()
+    #             mode_items.append(map._buckets._data[i]._head.key)
+    #         elif map._buckets._data[i]._head.value == frequency:
+    #             mode_items.append(map._buckets._data[i]._head.key)
+
     for i in range(map.get_capacity()):
         if map._buckets._data[i].length() != 0:
-            if map._buckets._data[i]._head.value > frequency:
-                frequency = map._buckets._data[i]._head.value
-                mode_items= DynamicArray()
-                mode_items.append(map._buckets._data[i]._head.key)
-            elif map._buckets._data[i]._head.value == frequency:
-                mode_items.append(map._buckets._data[i]._head.key)
+            sll = map._buckets._data[i]
+            for node in sll:
+                if node.value > frequency:
+                    frequency = node.value
+                    mode_items= DynamicArray()
+                    mode_items.append(node.key)
+                elif node.value == frequency:
+                    mode_items.append(node.key)
+                node = node.next
+    return mode_items, frequency
+
+
+
 
     return mode_items, frequency
 
@@ -515,20 +531,20 @@ if __name__ == "__main__":
 
     print("\nPDF - find_mode example 1")
     print("-----------------------------")
-    da = DynamicArray(["apple", "apple", "grape", "melon", "peach"])
+    da = DynamicArray(['D', 'BlnKnizHe', 'wJDvg', 'QEH', 'jo', 'bd', 'UgVUE'])
     mode, frequency = find_mode(da)
     print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}")
 
-    print("\nPDF - find_mode example 2")
-    print("-----------------------------")
-    test_cases = ([
-        "Arch", "Manjaro", "Manjaro", "Mint", "Mint", "Mint", "Ubuntu",
-        "Ubuntu", "Ubuntu"
-    ], ["one", "two", "three", "four", "five"], [
-        "2", "4", "2", "6", "8", "4", "1", "3", "4", "5", "7", "3", "3", "2"
-    ])
+    # print("\nPDF - find_mode example 2")
+    # print("-----------------------------")
+    # test_cases = ([
+    #     "Arch", "Manjaro", "Manjaro", "Mint", "Mint", "Mint", "Ubuntu",
+    #     "Ubuntu", "Ubuntu"
+    # ], ["one", "two", "three", "four", "five"], [
+    #     "2", "4", "2", "6", "8", "4", "1", "3", "4", "5", "7", "3", "3", "2"
+    # ])
 
-    for case in test_cases:
-        da = DynamicArray(case)
-        mode, frequency = find_mode(da)
-        print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}\n")
+    # for case in test_cases:
+    #     da = DynamicArray(case)
+    #     mode, frequency = find_mode(da)
+    #     print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}\n")
