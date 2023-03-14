@@ -90,7 +90,7 @@ class HashMap:
 
     def put(self, key: str, value: object) -> None:
         """
-        TODO: Write this implementation
+        Adds key/value pair to the hash map.
         """
         load_factor = self._size / self.get_capacity()
 
@@ -98,12 +98,10 @@ class HashMap:
         if load_factor >= 1:
             self.resize_table(self.get_capacity() * 2)
         
+        #Hash process to get index
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
-        
-
-        # print(self.get_capacity())
 
         # If there is node in the linked list at this index with the same key, so need to overwrite
         if self._buckets[index].contains(key):
@@ -114,113 +112,104 @@ class HashMap:
             self._buckets[index].insert(key, value) 
             self._size += 1
 
-
     def empty_buckets(self) -> int:
         """
-        TODO: Write this implementation
+        Returns the number of empty buckets of the map.
         """
         counter = 0
+
+        # iterating and counting empty buckets
         for i in range(self.get_capacity()):
             if self._buckets[i].length() == 0:
                 counter += 1
         return counter
 
-
     def table_load(self) -> float:
         """
-        TODO: Write this implementation
+        Returns load factor of the hash map. 
         """
         load_factor = self._size / self.get_capacity()
         return load_factor
 
     def clear(self) -> None:
         """
-        TODO: Write this implementation
+        Clears the hashmap.
         """
         new_bucket = DynamicArray()
+        # Adding placeholders to the array
         for i in range(self._capacity):
             new_bucket.append(LinkedList())
         self._buckets = new_bucket
         self._size = 0
 
 
-
-
     def resize_table(self, new_capacity: int) -> None:
             """
-            TODO: Write this implementation
+            Resizes the table with given new capacity.
             """
-            
+            # If new capacity is less than 1, do nothing
             if (new_capacity < 1):
                 return
 
+            # If new capacity is not prime, getting prime one
             if self._is_prime(new_capacity) is False:
                 new_capacity = self._next_prime(new_capacity)
 
-                      
             # new bucket created
             copy_bucket = self._buckets
             copy_capacity = self._capacity 
 
-            
+            # Resetting the underlying array and its size
             self._buckets = DynamicArray()
             self._size = 0
            
-
             # adding SLLs tothe new bucket
             for _ in range(new_capacity):
                 self._buckets.append(LinkedList())
 
             self._capacity = new_capacity
             for i in range(copy_capacity): 
-                
-                #get the key, hash new index, and set in new array based on that index.
+                # If empty 
                 if copy_bucket[i].length() == 0:
                     continue
-               
+                # If not empty
                 else:
                     sll = copy_bucket[i] 
+                    # Iterating and "putting" the values from old map to new
                     for node in sll:
                         value = node.value
                         key = node.key
-
                         self.put(node.key, node.value)
-                         
-            
-           
             return
-
 
     def get(self, key: str):
         """
-        TODO: Write this implementation
+        Returns the value associated with passed key.
         """
-        
+        # Hash process to get index
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
 
+        # If empty then return none
         if self._buckets[index].length() == 0:
             return None
-    
-        sll = self._buckets[index]
 
+        # Iterate till right node found
+        sll = self._buckets[index]
         for node in sll:
             if node.key == key:
                 return node.value
             node = node.next
         return None
 
-
-
-
-
     def contains_key(self, key: str) -> bool:
         """
-        TODO: Write this implementation
+        Returns boolean depending whether key is in map.
         """
         if self._size == 0:
             return False
+        # Hash process to get index
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
@@ -229,7 +218,6 @@ class HashMap:
             return False
         
         sll = self._buckets[index]
-
         for node in sll:
             if node.key == key:
                 return True
@@ -239,19 +227,21 @@ class HashMap:
 
     def remove(self, key: str) -> None:
         """
-        TODO: Write this implementation
+        Removes key/value pair from the map.
         """
+        # If empty, then just return
         if self._size == 0:
             return 
+        
+        # Hash process to get index
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
 
         if self._buckets[index].length() == 0:
             return 
-        
+        # Iterate till right node found
         sll = self._buckets[index]
-
         for node in sll:
             if node.key == key:
                 self._buckets[index].remove(key)
@@ -260,61 +250,51 @@ class HashMap:
             node = node.next
         return 
 
-
-
-
-
-
     def get_keys_and_values(self) -> DynamicArray:
         """
-        TODO: Write this implementation
+        Returns DynamicArray of key/value pairs in map.
         """
         return_array = DynamicArray()
 
         for i in range(self.get_capacity()):
-            #get the key, hash new index, and set in new array based on that index.
             if self._buckets[i].length() == 0:
                 continue
             else:
+                # Iterate till right node found
                 sll = self._buckets[i]
-
                 for node in sll:
                     key_pair = (node.key, node.value)
                     return_array.append(key_pair)    
-                      
                     node = node.next
         return return_array
 
 
 def find_mode(da: DynamicArray) -> (DynamicArray, int):
     """
-    TODO: Write this implementation
+    Returns tuple of Dynamic array which contains mode elements and integer which is frequency.
     """
     map = HashMap()
 
- 
+    # Iterating over the passed DA and adding it to map
     for i in range(da.length()):
+        # If if element is not in map
         if map.contains_key(da[i]) is False:
             map.put(da[i], 1)
+        # If element is in map, then we increment the value (frequency)
         else:
            value =  map.get(da[i]) + 1
            map.put(da[i], value)
-    print(map)
+    
+    # Variables that will hold frequency and mode elements
     frequency = 1
     mode_items = DynamicArray()
 
-    # for i in range(map.get_capacity()):
-    #     if map._buckets._data[i].length() != 0:
-    #         if map._buckets._data[i]._head.value > frequency:
-    #             frequency = map._buckets._data[i]._head.value
-    #             mode_items= DynamicArray()
-    #             mode_items.append(map._buckets._data[i]._head.key)
-    #         elif map._buckets._data[i]._head.value == frequency:
-    #             mode_items.append(map._buckets._data[i]._head.key)
-
+    # Iterating and adding the elements into DA if meets mode requirement
     for i in range(map.get_capacity()):
+        # If not empty
         if map._buckets._data[i].length() != 0:
             sll = map._buckets._data[i]
+            # If the SLL has multple nodes, we go through them
             for node in sll:
                 if node.value > frequency:
                     frequency = node.value
@@ -323,11 +303,6 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
                 elif node.value == frequency:
                     mode_items.append(node.key)
                 node = node.next
-    return mode_items, frequency
-
-
-
-
     return mode_items, frequency
 
 
@@ -535,16 +510,16 @@ if __name__ == "__main__":
     mode, frequency = find_mode(da)
     print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}")
 
-    # print("\nPDF - find_mode example 2")
-    # print("-----------------------------")
-    # test_cases = ([
-    #     "Arch", "Manjaro", "Manjaro", "Mint", "Mint", "Mint", "Ubuntu",
-    #     "Ubuntu", "Ubuntu"
-    # ], ["one", "two", "three", "four", "five"], [
-    #     "2", "4", "2", "6", "8", "4", "1", "3", "4", "5", "7", "3", "3", "2"
-    # ])
+    print("\nPDF - find_mode example 2")
+    print("-----------------------------")
+    test_cases = ([
+        "Arch", "Manjaro", "Manjaro", "Mint", "Mint", "Mint", "Ubuntu",
+        "Ubuntu", "Ubuntu"
+    ], ["one", "two", "three", "four", "five"], [
+        "2", "4", "2", "6", "8", "4", "1", "3", "4", "5", "7", "3", "3", "2"
+    ])
 
-    # for case in test_cases:
-    #     da = DynamicArray(case)
-    #     mode, frequency = find_mode(da)
-    #     print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}\n")
+    for case in test_cases:
+        da = DynamicArray(case)
+        mode, frequency = find_mode(da)
+        print(f"Input: {da}\nMode : {mode}, Frequency: {frequency}\n")
