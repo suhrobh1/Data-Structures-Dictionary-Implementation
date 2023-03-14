@@ -257,19 +257,6 @@ class HashMap:
         if self._buckets[index].length() == 0:
             return 
         
-
-        # iterator_obj = self._buckets[index].__iter__()
-        # sll_iterator = iterator_obj.__iter__()
-        # node = sll_iterator.__next__()
-        # while node :
-        #     if node.key == key:
-        #         self._buckets[index].remove(key)
-        #         self._size -= 1
-        #     node = node.next
-        # return 
-    
-
-    
         sll = self._buckets[index]
 
         for node in sll:
@@ -296,16 +283,23 @@ class HashMap:
             if self._buckets[i].length() == 0:
                 continue
             else:
-                iterator_obj = self._buckets[i].__iter__()
-                sll_iterator = iterator_obj.__iter__()
-                node = sll_iterator.__next__()
-                # print("node", node)
-                while node:
+        #         iterator_obj = self._buckets[i].__iter__()
+        #         sll_iterator = iterator_obj.__iter__()
+        #         node = sll_iterator.__next__()
+        #         while node:
+        #             key_pair = (node.key, node.value)
+        #             return_array.append(key_pair)
+        #             node = node.next
+        # return return_array
+    
+                sll = self._buckets[i]
+
+                for node in sll:
                     key_pair = (node.key, node.value)
-                    return_array.append(key_pair)
+                    return_array.append(key_pair)    
+                      
                     node = node.next
         return return_array
-
 
 
 def find_mode(da: DynamicArray) -> (DynamicArray, int):
