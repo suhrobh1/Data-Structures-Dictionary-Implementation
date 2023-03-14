@@ -235,17 +235,6 @@ class HashMap:
         if self._buckets[index].length() == 0:
             return False
         
-
-        # iterator_obj = self._buckets[index].__iter__()
-        # sll_iterator = iterator_obj.__iter__()
-        # node = sll_iterator.__next__()
-        # # print("node", node)
-        # while node :
-        #     if node.key == key:
-        #         return True
-        #     node = node.next
-        # return False
-    
         sll = self._buckets[index]
 
         for node in sll:
@@ -253,13 +242,6 @@ class HashMap:
                 return True
             node = node.next
         return False
-
-
-
-
-
-
-
 
 
     def remove(self, key: str) -> None:
@@ -274,15 +256,34 @@ class HashMap:
 
         if self._buckets[index].length() == 0:
             return 
-        iterator_obj = self._buckets[index].__iter__()
-        sll_iterator = iterator_obj.__iter__()
-        node = sll_iterator.__next__()
-        while node :
+        
+
+        # iterator_obj = self._buckets[index].__iter__()
+        # sll_iterator = iterator_obj.__iter__()
+        # node = sll_iterator.__next__()
+        # while node :
+        #     if node.key == key:
+        #         self._buckets[index].remove(key)
+        #         self._size -= 1
+        #     node = node.next
+        # return 
+    
+
+    
+        sll = self._buckets[index]
+
+        for node in sll:
             if node.key == key:
                 self._buckets[index].remove(key)
                 self._size -= 1
+                return
             node = node.next
         return 
+
+
+
+
+
 
     def get_keys_and_values(self) -> DynamicArray:
         """
