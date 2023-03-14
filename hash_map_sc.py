@@ -210,15 +210,28 @@ class HashMap:
         if self._buckets[index].length() == 0:
             return None
         
-        iterator_obj = self._buckets[index].__iter__()
-        sll_iterator = iterator_obj.__iter__()
-        node = sll_iterator.__next__()
-        # print("node", node)
-        while node :
+        # iterator_obj = self._buckets[index].__iter__()
+        # sll_iterator = iterator_obj.__iter__()
+        # node = sll_iterator.__next__()
+        # # print("node", node)
+        
+        # while node :
+        #     if node.key == key:
+        #         return node.value
+        #     node = node.next
+        # return None
+    
+        sll = self._buckets[index]
+
+        for node in sll:
             if node.key == key:
                 return node.value
             node = node.next
         return None
+
+
+
+
 
     def contains_key(self, key: str) -> bool:
         """
@@ -292,15 +305,10 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
     """
     TODO: Write this implementation
     """
-    # if you'd like to use a hash map,
-    # use this instance of your Separate Chaining HashMap
     map = HashMap()
 
-    frequency = 1
-    mode_item = None
  
     for i in range(da.length()):
-        # print(da[i])
         if map.contains_key(da[i]) is False:
             map.put(da[i], 1)
         else:
@@ -319,10 +327,7 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
             elif map._buckets._data[i]._head.value == frequency:
                 mode_items.append(map._buckets._data[i]._head.key)
 
-            # print("map loop", map._buckets._data[i]._head.value)
-    
     return mode_items, frequency
-    # print(map)
 
 
 # ------------------- BASIC TESTING ---------------------------------------- #
