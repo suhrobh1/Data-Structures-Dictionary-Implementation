@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name: Suhrob Hasanov
+# OSU Email: hasanovs@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 6
+# Due Date: 3/13/23
+# Description: SC HashMap implementation  
 
 from a6_include import (DynamicArray, LinkedList, hash_function_1,
                         hash_function_2, SLNode)
@@ -98,7 +98,7 @@ class HashMap:
         if load_factor >= 1:
             self.resize_table(self.get_capacity() * 2)
         
-        #Hash process to get index
+        # Hash process to get index
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size

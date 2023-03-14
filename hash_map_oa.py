@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name: Suhrob Hasanov
+# OSU Email: hasanovs@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 6
+# Due Date: 3/13/23
+# Description: AO HashMap implementation  
 
 from a6_include import (DynamicArray, DynamicArrayException, HashEntry,
                         hash_function_1, hash_function_2)
@@ -87,7 +87,7 @@ class HashMap:
 
     def put(self, key: str, value: object) -> None:
         """
-        TODO: Write this implementation
+        Adds key/value pair to the hash map.
         """
         load_factor = self._size / self.get_capacity()
 
@@ -95,7 +95,7 @@ class HashMap:
         if load_factor >= 0.5:
             self.resize_table(self.get_capacity() * 2)
 
-
+        # Hash process to get index
         hash = self._hash_function(key)
         index = hash % self.get_capacity()
         original_index = index
@@ -129,27 +129,27 @@ class HashMap:
 
     def table_load(self) -> float:
         """
-        TODO: Write this implementation
+        Returns load factor of the hash map. 
         """
-
         load_factor = self._size / self.get_capacity()
         return load_factor
 
     def empty_buckets(self) -> int:
         """
-        TODO: Write this implementation
+        Returns the number of empty buckets of the map.
         """
         return self._capacity - self._size
 
 
     def resize_table(self, new_capacity: int) -> None:
         """
-        TODO: Write this implementation
+        Resizes the table with given new capacity.
         """
-        # print("-------IN RESIZE----------")
+        # If new capacity is less than size, do nothing
         if new_capacity < self._size:
             return
         
+        # If new capacity is not prime, getting prime one
         if self._is_prime(new_capacity) is False:
                 new_capacity = self._next_prime(new_capacity)
 
@@ -178,13 +178,11 @@ class HashMap:
 
         return
 
-
-
-
     def get(self, key: str) -> object:
         """
-        TODO: Write this implementation
+        Returns the value associated with passed key.
         """
+        # Hash process to get index
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
@@ -193,8 +191,10 @@ class HashMap:
 
         j = 1
         location = self._buckets[index]
+        # Iterating and probing for open location
         while location is not None:
             if self._buckets[index].key == key:
+                # Making sure that item was not previously removed
                 if self._buckets[index].is_tombstone is False:
                     return self._buckets[index].value
             index = (original_index + j * j) % self._capacity
@@ -202,14 +202,15 @@ class HashMap:
             if index >= self._capacity:
                 break
             else:
+                # Incrementing the location
                 location = self._buckets[index]
         return None
 
     def contains_key(self, key: str) -> bool:
         """
-        TODO: Write this implementation
+        Returns boolean depending whether key is in map.
         """
-        
+        # Hash and indexing process
         hash = self._hash_function(key)
         size = self.get_capacity()
         index = hash % size
@@ -218,6 +219,7 @@ class HashMap:
 
         j = 1
         location = self._buckets[index]
+        # Iterating and probing correct key
         while location is not None:
             if self._buckets[index].key == key:
                 return True
@@ -232,7 +234,7 @@ class HashMap:
 
     def remove(self, key: str) -> None:
         """
-        TODO: Write this implementation
+        Removes key/value pair from the map.
         """
         
         hash = self._hash_function(key)
@@ -245,6 +247,7 @@ class HashMap:
         location = self._buckets[index]
         while location is not None:
             if self._buckets[index].key == key:
+                # If TS is false, need to set to True and decrement size
                 if self._buckets[index].is_tombstone is False:
                     self._buckets[index].is_tombstone = True
                     self._size -= 1
@@ -260,7 +263,7 @@ class HashMap:
 
     def clear(self) -> None:
         """
-        TODO: Write this implementation
+        Clears the hashmap.
         """
         new_bucket = DynamicArray()
         for i in range(self._capacity):
@@ -270,7 +273,7 @@ class HashMap:
 
     def get_keys_and_values(self) -> DynamicArray:
         """
-        TODO: Write this implementation
+        Returns DynamicArray of key/value pairs in map.
         """
         return_array = DynamicArray()
 
@@ -299,6 +302,7 @@ class HashMap:
         if self._index >= self._capacity:
             raise StopIteration
 
+        # Iterating and skipping the empty buckets
         while self._index < self._capacity:
             if self._buckets[self._index] is not None:
                 if self._buckets[self._index].is_tombstone == False:
@@ -309,16 +313,9 @@ class HashMap:
                     self._index = self._index + 1
             else:
                 self._index = self._index + 1
-        
         raise StopIteration 
         
-        # try:
-        #     value = self._buckets[self._index]
-        # except DynamicArrayException:
-        #     raise StopIteration
-
-        
-        # return value
+       
 
 
 
