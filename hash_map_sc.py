@@ -179,14 +179,7 @@ class HashMap:
                     continue
                
                 else:
-                    # iterator_obj = self._buckets[i].__iter__()
-                    # sll_iterator = iterator_obj.__iter__()
-                    # node = sll_iterator.__next__()
-                   
                     sll = copy_bucket[i] 
-                    # print("SLL PRINT-------", node)
-                    # Iteration through particular linked list
-
                     for node in sll:
                         value = node.value
                         key = node.key
@@ -283,15 +276,6 @@ class HashMap:
             if self._buckets[i].length() == 0:
                 continue
             else:
-        #         iterator_obj = self._buckets[i].__iter__()
-        #         sll_iterator = iterator_obj.__iter__()
-        #         node = sll_iterator.__next__()
-        #         while node:
-        #             key_pair = (node.key, node.value)
-        #             return_array.append(key_pair)
-        #             node = node.next
-        # return return_array
-    
                 sll = self._buckets[i]
 
                 for node in sll:
@@ -317,13 +301,13 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
            map.put(da[i], value)
 
     frequency = 1
-    mode_items = []
+    mode_items = DynamicArray()
 
     for i in range(map.get_capacity()):
         if map._buckets._data[i].length() != 0:
             if map._buckets._data[i]._head.value > frequency:
                 frequency = map._buckets._data[i]._head.value
-                mode_items= []
+                mode_items= DynamicArray()
                 mode_items.append(map._buckets._data[i]._head.key)
             elif map._buckets._data[i]._head.value == frequency:
                 mode_items.append(map._buckets._data[i]._head.key)
